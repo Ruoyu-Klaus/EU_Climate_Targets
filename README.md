@@ -1,2 +1,0 @@
-# diginv
- Digital Investigation project
