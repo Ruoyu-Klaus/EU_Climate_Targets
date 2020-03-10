@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- End sourcing of Bootstrap -->
+
+    <!--D3-->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <!--========= 
+	LINK TO amCHART
+	=============-->
+    <script src="http://www.amcharts.com/lib/4/core.js"></script>
+    <script src="http://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="http://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <title>EU & Climate Change</title>
+
+</head>
+
+<body>
+    <section id="section1">
+        <div class="container-fluid" id="front-page">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <h1>Behind the numbers: Why the EU looks like it’s meeting climate targets</h1>
+                    <hr>
+                    <h6 id="byline">By Bruno Dubrulle, Ruoyu Wang & Helena Robertson</h6>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <p id="intro">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget tellus venenatis,
+                        sollicitudin
+                        nisl ut, sagittis lorem. Nunc vestibulum interdum mauris, non ultricies nulla tincidunt ac.
+                        Ut
+                        ullamcorper arcu sollicitudin placerat lobortis. Integer aliquet eros vitae purus dapibus,
+                        sed
+                        maximus lacus pretium. Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+                        per
+                        inceptos himenaeos. Aenean pretium ipsum feugiat mauris faucibus luctus. In porta turpis
+                        felis,
+                        nec
+                        ullamcorper justo maximus vitae. Vivamus ornare faucibus varius.
+                    </p>
+                    <p>
+                        Phasellus non nunc fringilla, auctor leo a, venenatis lacus. Quisque interdum aliquam metus,
+                        scelerisque accumsan enim. Mauris placerat lectus ut ipsum egestas maximus. Sed non semper
+                        leo.
+                        Cras
+                        sit amet quam efficitur, tincidunt sapien at, porta nisl. Pellentesque vitae quam mi. Donec
+                        nulla
+                        metus, porttitor eu molestie sodales, dapibus et neque. Sed scelerisque ipsum non lacus
+                        dictum
+                        posuere. Donec pretium diam vel tellus tincidunt aliquam.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- cover -->
+
+
+    <!-- stage one  -->
+    <section id="section2">
+        <div class="container-fluid" id="scrollContainer">
+            <div class="row" id="graphScrollContainer">
+                <div class="col-7" id="graphTargetsGraph">
+                    <svg class="timeline">
+                        <text x="30" y="30" fill="#df9827" font-size="2em">EU Climate Targets</text>
+                        <text x="30" y="50" fill="#fef7ea">Greenhouse gas emissions as % of 1990
+                            levels</text>
+                        <text x="730" y="60" fill="#fef7ea" font-size="1.2rem">%</text>
+                    </svg>
+                </div>
+                <div class="col-5" id="graphTargetsText">
+                    <div id="blankBox"></div>
+                    <div>
+                        <p>Europe has a history of progressive environmental legislation, with the earliest measures
+                            dating
+                            back
+                            to 1996, when the EU adopted a target to limit the global temperature rise to below 2 °C,
+                            compared
+                            to pre-industrial levels.
+                        </p>
+                    </div>
+                    <div>
+                        <p>Currently, the EU has set itself milestones for 2020, 2030 and 2050.
+                        </p>
+                    </div>
+                    <div>
+                        <p>By the end of 2020, the EU aims to cut 20% in greenhouse gas emissions from 1990 levels.
+                        </p>
+                    </div>
+                    <div>
+                        <p>In 2018, emissions were down by 23.2% across the EU, putting the EU firmly on track to meet
+                            its
+                            target at the end of 2020.
+                        </p>
+                    </div>
+                    <div>
+                        <p>By 2030, the EU expects to cut greenhouse gas emissions by at least 40% from 1990 levels.
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>In November 2019 a new European Commission, the executive branch of the EU, took office.
+                            Ursula
+                            von
+                            der Leyen, the Commission’s first-ever female president, vowed for a green, geopolitical and
+                            digital
+                            EU in her speech before Parliament.
+                        </p>
+                    </div>
+                    <div>
+                        <p>The European ‘Green Deal’ aims for at least a 50-55% emissions reduction by 2030.
+                        </p>
+                    </div>
+                    <div>
+                        <p> The 'Green Deal' also committed Europe to becoming climate neutral by 2050. The proposals
+                            would be enshrine in law this
+                            summer. Climate neutrality means emissions will yield no net impact on the climate:
+                            climate-damaging
+                            greenhouse gases are either completely avoided or, if gases have been emitted, they are
+                            offset
+                            with
+                            climate protection measures (by planting trees for example). </p>
+                    </div>
+                    <div id="blankBox">
+                        <!-- Button trigger modal -->
+                        <!-- https://getbootstrap.com/docs/4.0/components/modal/ Bootstrap documentation reference -->
+                        <button type="button" class="btn btn-danger align-center" data-toggle="modal"
+                            data-target="#exampleModalLong">
+                            But what about Brexit? <br>Click Here to find out more
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Brexit</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Phasellus non nunc fringilla, auctor leo a, venenatis lacus. Quisque interdum
+                                            aliquam metus,
+                                            scelerisque accumsan enim. Mauris placerat lectus ut ipsum egestas maximus.
+                                            Sed non semper
+                                            leo.
+                                            Cras
+                                            sit amet quam efficitur, tincidunt sapien at, porta nisl. Pellentesque vitae
+                                            quam mi. Donec
+                                            nulla
+                                            metus, porttitor eu molestie sodales, dapibus et neque. Sed scelerisque
+                                            ipsum non lacus
+                                            dictum
+                                            posuere. Donec pretium diam vel tellus tincidunt aliquam.Phasellus non nunc
+                                            fringilla, auctor leo a, venenatis lacus. Quisque interdum aliquam metus,
+                                            scelerisque accumsan enim. Mauris placerat lectus ut ipsum egestas maximus.
+                                            Sed non semper
+                                            leo.
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- stage two -->
+    <section id="section3">
+        <div class="container-fluid" id="stage-2">
+            <!-- title for stage two -->
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <h2 class="text-center">Can the EU meet it's new 2030 target?</h2>
+                </div>
+            </div>
+            <!-- explaining text -->
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <p>The new proposed EU target for 2030 is to reduce emissions by <b>between 50 and 55 per cent</b>,
+                        compared to
+                        1990 levels. The charts below show projections for 2030 (by county and for the EU as a whole)
+                        under
+                        current policy.</p>
+
+                    <p>Drag the bars for each country to see how far Member States would need to reduce emissions to
+                        meet
+                        the new target.</p>
+                </div>
+            </div>
+            <!-- interactive tool -->
+            <div class="row">
+                <div class="col-6">
+                    <div class="ml-3" id="country-bar">
+
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mr-3 pl-4" id="overall-eu">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- stage three -->
+    <section id="section4">
+        <div class="container-fluid">
+            <!-- title for stage three -->
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <h2 class="text-center">Creative carbon accounting</h2>
+                </div>
+            </div>
+            <!-- text explaining following the product & idea of CCA -->
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sodales, justo eget mollis semper,
+                        elit
+                        arcu varius dui, porta tincidunt lacus mi ac metus. Pellentesque consectetur urna ultricies
+                        turpis
+                        tempus aliquet. Ut malesuada arcu quis erat viverra efficitur. Maecenas ex odio, scelerisque ac
+                        quam
+                        ac, vehicula convallis tellus.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sodales, justo eget mollis semper,
+                        elit
+                        arcu varius dui, porta tincidunt lacus mi ac metus. Pellentesque consectetur urna ultricies
+                        turpis
+                        tempus aliquet. Ut malesuada arcu quis erat viverra efficitur. Maecenas ex odio, scelerisque ac
+                        quam
+                        ac, vehicula convallis tellus.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sodales, justo eget mollis semper,
+                        elit
+                        arcu varius dui, porta tincidunt lacus mi ac metus. Pellentesque consectetur urna ultricies
+                        turpis
+                        tempus aliquet. Ut malesuada arcu quis erat viverra efficitur. Maecenas ex odio, scelerisque ac
+                        quam
+                        ac, vehicula convallis tellus.</p>
+
+                </div>
+            </div>
+
+            <!-- Tracing laptop production chain -->
+            <div class="row justify-content-center">
+                <div class="col-2">
+                    <div id="country-box"></div>
+                </div>
+                <div class="col-2">
+                    <div id="country-box"></div>
+                </div>
+                <div class="col-2">
+                    <div id="country-box"></div>
+                </div>
+                <div class="col-2">
+                    <div id="country-box"></div>
+                </div>
+                <div class="col-2">
+                    <div id="country-box"></div>
+                </div>
+                <div class="col-2">
+                    <div id="country-box"></div>
+                </div>
+            </div>
+            <!-- text explaining CCA chart -->
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sodales, justo eget mollis semper,
+                        elit
+                        arcu varius dui, porta tincidunt lacus mi ac metus. Pellentesque consectetur urna ultricies
+                        turpis
+                        tempus aliquet. Ut malesuada arcu quis erat viverra efficitur. Maecenas ex odio, scelerisque ac
+                        quam
+                        ac, vehicula convallis tellus.</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <div class="flourish-embed flourish-bar-chart-race" data-src="visualisation/1514254">
+                        <script src="https://public.flourish.studio/resources/embed.js"></script>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CCA chart -->
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <svg class="cca-chart">
+                        <text x="30" y="35" fill="#fef7ea" font-size="1.5em">Greenhouse gas emissions embedded in
+                            trade</text>
+                        <text x="30" y="54" fill="#fef7ea">% difference between production and consumption emissions
+                        </text>
+                    </svg>
+                </div>
+            </div>
+    </section>
+    <!--========= 
+	LINK TO ANNOTATIONS
+	=============-->
+    <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+
+    <script src="index.js"></script>
+    <!--========= 
+	LINK TO JET PACK
+	=============-->
+    <script src="pkg/d3v4+jetpack.js"></script>
+    <!--========= 
+	LINK TO GRAPH SCROLL
+	=============-->
+    <script src="pkg/graph-scroll.js"></script>
+
+    <!--========= 
+	LINK TO Transition FOR LINE CHART
+	=============-->
+    <script src="pkg/transitionBarchart.js"></script>
+
+
+
+
+</body>
+
+
+</html>
