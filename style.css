@@ -65,6 +65,10 @@ b {
     margin-top: 5vh;
 }
 
+#section1 {
+    height: 100vh;
+}
+
 #stage1-text {
     padding-top: 10vh;
 }

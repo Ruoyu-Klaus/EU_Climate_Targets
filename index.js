@@ -289,15 +289,13 @@
 
 
 
-
-
-
-
     // -----------STAGE TWO----------- //
 
+    am4core.useTheme(am4themes_animated);
     var chart = am4core.create("country-bar", am4charts.XYChart);
+    chart.hiddenState.properties.opacity = 0;
+    chart.responsive.enabled = true;
     chart.dataSource.url = "data/draggablebar_data.json";
-
     chart.padding(40, 40, 0, 0);
     chart.maskBullets = false; // allow bullets to go out of plot area
 
@@ -305,8 +303,8 @@
     // category axis
     var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = "name";
-    // categoryAxis.renderer.grid.template.disabled = true;
-    categoryAxis.renderer.minGridDistance = 0;
+    categoryAxis.renderer.grid.template.disabled = true;
+    categoryAxis.renderer.minGridDistance = 10;
     categoryAxis.renderer.labels.template.marginLeft = 40;
     categoryAxis.renderer.labels.template.dx = -40;
     categoryAxis.renderer.labels.template.fill = am4core.color("#fef7ea");
@@ -320,11 +318,12 @@
     valueAxis.min = -100;
     valueAxis.max = 50;
     valueAxis.renderer.minWidth = 60;
+    // valueAxis.renderer.grid.template.disabled = true;
     valueAxis.renderer.labels.template.fill = am4core.color("#fef7ea");
     valueAxis.renderer.line.strokeOpacity = 1;
     valueAxis.renderer.line.strokeWidth = 1.5;
     valueAxis.renderer.line.stroke = am4core.color("#fef7ea");
-    valueAxis.title.text = "% change in emissions from 1990 levels"
+    valueAxis.title.text = "% change in emissions from 1990 levels by country"
     valueAxis.title.fill = am4core.color("#fef7ea")
 
 
@@ -336,6 +335,7 @@
     series.defaultState.interpolationDuration = 1500;
     series.columns.template.strokeOpacity = 0;
     series.columns.template.fill = am4core.color("#df9827");
+
 
     // zero Line
     var range = valueAxis.axisRanges.create();
@@ -353,15 +353,16 @@
     labelBullet.label.fill = am4core.color("#fef7ea");
     labelBullet.stroke = am4core.color("#fef7ea");
     labelBullet.dy = 0;
-    labelBullet.dx = -20;
+    labelBullet.dx = -24;
     labelBullet.label.truncate = false;
 
     // series bullet
     var bullet = series.bullets.create();
     bullet.stroke = am4core.color("#ffffff");
-    bullet.strokeWidth = 3;
+    bullet.strokeWidth = 5;
     bullet.opacity = 1; // initially invisible
     bullet.defaultState.properties.opacity = 1;
+    bullet.dy = -8;
     // resize cursor when over
     bullet.cursorOverStyle = am4core.MouseCursorStyle.horizontalResize;
     bullet.draggable = true;
@@ -372,9 +373,9 @@
 
     // add circle sprite to bullet
     var circle = bullet.createChild(am4core.Circle);
-    circle.fill = am4core.color("#ffffff")
-    circle.radius = 2;
-    circle.dy = -8;
+    circle.fill = am4core.color("#888")
+    circle.opacity = 0.8
+    circle.radius = 5;
 
 
     // while dragging
@@ -426,10 +427,6 @@
         var dataItem = event.target.dataItem;
         var itemBullet = dataItem.bullets.getKey(bullet.uid);
         var column = dataItem.column;
-        // itemBullet.minX = column.pixelX + column.pixelWidth / 2;
-        // itemBullet.maxX = itemBullet.minX;
-        // itemBullet.minY = 0;
-        // itemBullet.maxY = chart.seriesContainer.pixelHeight;
         itemBullet.minX = 0;
         itemBullet.maxX = chart.seriesContainer.pixelWidth;
         itemBullet.minY = column.pixelY + column.pixelHeight;
@@ -439,12 +436,12 @@
     // Eu chart 
     var euChart = {
         width: 400,
-        height: 400,
+        height: 450,
         margin: {
-            left: 25,
+            left: 40,
             right: 10,
-            top: 20,
-            bottom: 40
+            top: 10,
+            bottom: 50
         },
     }
     var overallEu = d3.select("#overall-eu")
@@ -490,14 +487,44 @@
         .attr("class", "grid")
         .call(euGridLine);
 
-    function createCircle(y = -30) {
+    overallEu.append("text")
+        .attr("y", "92.5%")
+        .attr("x", "34%")
+        .style("text-anchor", "middle")
+        .style("fill", "#fef7ea")
+        .style("font-size", "0.7em")
+        .text("overall EU % change in emissions from 1990 levels");
+
+
+    overallEu.append("rect")
+        .attr("x", euXscale(0))
+        .attr("y", euYscale(-50))
+        .attr("width", euXscale(1.4))
+        .attr("height", euYscale(-55) - euYscale(-50))
+        .style("fill", "#df9827")
+        .style("opacity", 0.4)
+
+
+    overallEu.append("rect")
+        .attr("x", euXscale(0))
+        .attr("y", euYscale(-33))
+        .attr("width", euXscale(1.4))
+        .attr("height", euYscale(-48) - euYscale(-33))
+        .style("fill", "#888")
+        .style("opacity", 0.6)
+
+
+    function createCircle(y = -33) {
         var dots = overallEu.selectAll(".dot")
             .data([{
                 x: 0.75,
                 y: y,
             }])
+
         dots.exit()
+            .transition(transition)
             .remove()
+
         var new_dots = dots.enter()
             .append("circle")
             .attr("class", "dot")
@@ -505,12 +532,39 @@
             .attr("fill", "#df9827")
 
         dots.merge(new_dots)
+            .transition(transition)
             .attr("cx", function (d) {
                 return euXscale(d.x);
             })
             .attr("cy", function (d) {
                 return euYscale(d.y);
             })
+
+        var euText = overallEu.selectAll(".euText")
+            .data([{
+                x: 0.75,
+                y: y,
+            }]);
+
+        euText.exit()
+            .transition(transition)
+            .remove()
+
+        var newText = euText.enter()
+            .append("text")
+            .attr("class", "euText")
+            .attr("fill", "#fef7ea");
+        newText.merge(euText)
+            .text(Math.round(y))
+            .transition(transition)
+            .attr("x", function (d) {
+                return euXscale(d.x) * 0.92;
+            })
+            .attr("y", function (d) {
+                return euYscale(d.y) * 1.03;
+            });
+
+
     }
     createCircle()
 
@@ -519,6 +573,12 @@
         .call(euXaxis);
     overallEu.select(".y.axis")
         .call(euYaxis);
+
+    function reset() {
+        createCircle()
+        chart.dataSource.url = "data/draggablebar_data.json";
+        chart.dataSource.load()
+    }
 
 
 
