@@ -11,9 +11,15 @@
 
     var stage1Chart = d3.select(".timeline")
         .attr("viewBox", "0 0 " + width + " " + height) //making responsive? - resizes svg within window
+        .attr("class", "mr-2")
         .attr("class", "mt-5")
-    // .attr("width", width)
-    // .attr("height", height)
+
+    var brexitBtn = d3.select(".brexitBtn")
+        .attr("fill", "#dc3545")
+        .attr("cursor", "pointer")
+        .on("click", function () {
+            document.getElementById("brexitBtn").click()
+        })
 
     // Append g to wrap up line chart
     var stage1Wrapper = stage1Chart.append("g")
@@ -592,6 +598,15 @@
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         .attr("transform", "translate(50,100)")
 
+    var tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-10, 0])
+        .html(function (d) {
+            return "<strong>Country:</strong> <span style='color:red'>" + d.country +
+                "</span><br><strong>Difference:</strong> <span style='color:red'>" + d.prop + "</span>";
+        })
+    stage3Chart.call(tip);
+
     d3.csv("data/worldGHG_tradeEmission2.csv").then(function (data) {
         data.forEach(function (d) {
             d.volumeGT = +d.volumeGT;
@@ -602,8 +617,6 @@
             cur.start = acc;
             return acc + (cur.volumeGT);
         }, 0);
-
-
 
         //Set x-axis scale
         var xScale3 = d3.scaleLinear()
@@ -691,7 +704,19 @@
             })
             .attr("x", function (d, i) {
                 return xScale3(d.start);
-            });
-
-
+            })
+            .on('mouseover', MouseOver)
+            .on('mouseout', MouseOut)
     });
+
+    function MouseOver(d, i) { // Add interactivity
+        // Use D3 to select element, change color and size
+        d3.select(this).attr("stroke-width", 0.8);
+        tip.show(d, i)
+    }
+
+    function MouseOut(d, i) {
+        // Use D3 to select element, change color back to normal
+        d3.select(this).attr("stroke-width", 0.1);
+        tip.hide(d, i)
+    }
