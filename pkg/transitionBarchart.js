@@ -12,14 +12,16 @@ var transition1 = function () {
     d3.selectAll(".annotations,.annotation-line")
         .transition()
         .duration(1000)
-        .style("display", "none")
+        // .style("display", "none")
+        .style("visibility", "hidden")
         .style("opacity", 0);
 }
 var transition2 = function () {
     d3.selectAll(".annotations,.annotation-line")
         .transition()
         .duration(1000)
-        .style("display", "block")
+        // .style("display", "block")
+        .style("visibility", "visible")
         .style("opacity", 1);
     d3.select(".figure2")
         .transition()
@@ -30,7 +32,8 @@ var transition3 = function () {
     d3.selectAll(".annotations,.annotation-line")
         .transition()
         .duration(1000)
-        .style("display", "block")
+        // .style("display", "block")
+        .style("visibility", "visible")
         .style("opacity", 0);
     d3.select(".figure2")
         .transition()
@@ -39,14 +42,16 @@ var transition3 = function () {
     d3.select(".projection-shape1")
         .transition()
         .duration(1000)
-        .style("display", "none")
+        // .style("display", "none")
+        .style("visibility", "hidden")
 
 }
 var transition4 = function () {
     d3.select(".projection-shape1")
         .transition()
         .duration(1000)
-        .style("display", "block")
+        // .style("display", "block")
+        .style("visibility", "visible")
         .style("opacity", 0.5);
 
     d3.select(".figure2")
@@ -57,23 +62,28 @@ var transition4 = function () {
     d3.select(".projection-shape2")
         .transition()
         .duration(1000)
-        .style("display", "none")
+        // .style("display", "none")
+        .style("visibility", "hidden")
         .style("opacity", 0);
 }
 var transition5 = function () {
     d3.select(".projection-shape2")
         .transition()
         .duration(1000)
-        .style("display", "block")
+        // .style("display", "block")
+        .style("visibility", "visible")
         .style("opacity", 0.5);
 }
+
+
+
 
 d3.graphScroll()
     .graph(d3.selectAll('#graphTargetsGraph'))
     .container(d3.select('#graphScrollContainer'))
     .sections(d3.selectAll('#graphTargetsText > div'))
     .on('active', function (i) {
-        console.log(i + 'th section active');
+        // console.log(i + 'th section active');
         if (i < 2) {
             transition0()
         } else if (i == 2) {
@@ -87,5 +97,23 @@ d3.graphScroll()
         } else if (i == 7) {
             transition5()
         }
-    })
-    .offset(20);
+    });
+
+
+
+// window.onresize = displayWindowSize;
+// window.onload = displayWindowSize;
+
+function displayWindowSize() {
+    let currentWidth = window.innerWidth;
+    // console.log(currentWidth)
+    // d3.graphScroll()
+    //     .graph(d3.selectAll('#graphTargetsGraph'))
+    //     .container(d3.select('#graphScrollContainer'))
+    //     .sections(d3.selectAll('#graphTargetsText > div'))
+    //     .offset(currentWidth > 925 ? 300 : 200)
+    //     .on('active', function (i) {
+    //         console.log(i + 'th section active');
+    //     })
+
+};

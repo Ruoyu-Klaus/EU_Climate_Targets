@@ -1,0 +1,141 @@
+[{
+        "country": "UK",
+        "exp_change": -52.72,
+        "need_change": -81
+    },
+    {
+        "country": "Sweden",
+        "exp_change": -35.31,
+        "need_change": -53.69
+    },
+    {
+        "country": "Spain",
+        "exp_change": 7.67,
+        "need_change": 3.84
+    },
+    {
+        "country": "Slovenia",
+        "exp_change": -12.81,
+        "need_change": -19.07
+    },
+    {
+        "country": "Slovakia",
+        "exp_change": -43.57,
+        "need_change": -66.41
+    },
+    {
+        "country": "Romania",
+        "exp_change": -49.07,
+        "need_change": -74.89
+    },
+    {
+        "country": "Portugal",
+        "exp_change": -28.19,
+        "need_change": -42.74
+    },
+    {
+        "country": "Poland",
+        "exp_change": -13.59,
+        "need_change": -20.27
+    },
+    {
+        "country": "Netherlands",
+        "exp_change": -28.49,
+        "need_change": -43.21
+    },
+    {
+        "country": "Malta",
+        "exp_change": 26.65,
+        "need_change": 13.33
+    },
+    {
+        "country": "Luxembourg",
+        "exp_change": -20.93,
+        "need_change": -31.57
+    },
+    {
+        "country": "Lithuania",
+        "exp_change": -57.73,
+        "need_change": -88.21
+    },
+    {
+        "country": "Latvia",
+        "exp_change": -60.36,
+        "need_change": -92.26
+    },
+    {
+        "country": "Italy",
+        "exp_change": -25.98,
+        "need_change": -39.34
+    },
+    {
+        "country": "Ireland",
+        "exp_change": 16.08,
+        "need_change": 8.04
+    },
+    {
+        "country": "Hungary",
+        "exp_change": -33.11,
+        "need_change": -50.31
+    },
+    {
+        "country": "Greece",
+        "exp_change": -22.51,
+        "need_change": -34
+    },
+    {
+        "country": "Germany",
+        "exp_change": -41.64,
+        "need_change": -64
+    },
+    {
+        "country": "France",
+        "exp_change": -24.01,
+        "need_change": -36.32
+    },
+    {
+        "country": "Finland",
+        "exp_change": -37.61,
+        "need_change": -57.24
+    },
+    {
+        "country": "Estonia",
+        "exp_change": -63.36,
+        "need_change": -96.88
+    },
+    {
+        "country": "Denmark",
+        "exp_change": -25.68,
+        "need_change": -38.88
+    },
+    {
+        "country": "Czech Rep.",
+        "exp_change": -44.35,
+        "need_change": -67.62
+    },
+    {
+        "country": "Cyprus",
+        "exp_change": 44.52,
+        "need_change": 22.26
+    },
+    {
+        "country": "Croatia",
+        "exp_change": -26.08,
+        "need_change": -40
+    },
+    {
+        "country": "Bulgaria",
+        "exp_change": -42.7,
+        "need_change": -65.08
+    },
+    {
+        "country": "Belgium",
+        "exp_change": -15.99,
+        "need_change": -23.97
+    },
+    {
+        "country": "Austria",
+        "exp_change": -5.99,
+        "need_change": -8.57
+    }
+]

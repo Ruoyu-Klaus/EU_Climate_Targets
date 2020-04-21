@@ -1,6 +1,4 @@
 country,volumeMT,volumeGT,prop,region
-Trinidad and Tobago,26.42,0.02642,-56.65,non-EU
-Bahrain,47.08,0.04708,-42.2,non-EU
 Qatar,92.26,0.09226,-28.93,non-EU
 South Africa,496.33,0.49633,-28.36,non-EU
 Russia,2427.41,2.42741,-17.23,non-EU
@@ -12,23 +10,17 @@ Iran,800.89,0.80089,-11.26,non-EU
 Greece,87.12,0.08712,-11.24,EU
 Venezuela,255.52,0.25552,-11.16,non-EU
 Australia,584.85,0.58485,-9,non-EU
-Mongolia,48.08,0.04808,-8.35,non-EU
 India,3109.23,3.10923,-8.16,non-EU
 Netherlands,187.56,0.18756,-8.01,EU
 Poland,377.11,0.37711,-7.39,EU
-Brunei,16.34,0.01634,-5.66,non-EU
 Thailand,397.27,0.39727,-5.17,non-EU
 Saudi Arabia,663.58,0.66358,-1.67,non-EU
 Romania,105.78,0.10578,-1.31,EU
 Argentina,380.19,0.38019,-1.01,non-EU
-Estonia,19.26,0.01926,-0.31,EU
 Czech Republic,124.33,0.12433,-0.29,EU
-Guinea,28.98,0.02898,0,non-EU
-Rwanda,6.08,0.00608,0,non-EU
 Malaysia,291.28,0.29128,1.73,non-EU
 Ukraine,290.16,0.29016,1.82,non-EU
 Canada,695.34,0.69534,2.84,non-EU
-Croatia,22.77,0.02277,3.09,EU
 Vietnam,335.15,0.33515,3.54,non-EU
 Oman,75.99,0.07599,4.97,non-EU
 Azerbaijan,82.45,0.08245,5,non-EU
@@ -36,7 +28,6 @@ Mexico,676.9,0.6769,5.09,non-EU
 Morocco,89.51,0.08951,5.2,non-EU
 Egypt,310.64,0.31064,5.31,non-EU
 Chile,108.53,0.10853,5.39,non-EU
-Cyprus,8.57,0.00857,5.79,EU
 South Korea,697,0.697,6.36,non-EU
 United Arab Emirates,259.43,0.25943,6.41,non-EU
 Pakistan,375.03,0.37503,7.11,non-EU
@@ -48,70 +39,28 @@ Portugal,67.29,0.06729,9.01,EU
 Peru,97.41,0.09741,9.04,non-EU
 Spain,316.8,0.3168,10.24,EU
 Germany,848.76,0.84876,10.73,EU
-Norway,46.76,0.04676,10.75,non-EU
 Turkey,460.81,0.46081,12.23,non-EU
 Belarus,83.71,0.08371,12.92,non-EU
 New Zealand,80.33,0.08033,13.93,non-EU
 Bolivia,55.98,0.05598,15.58,non-EU
 Colombia,190.38,0.19038,15.59,non-EU
 Ecuador,64.66,0.06466,15.61,non-EU
-Slovenia,17.15,0.01715,15.71,EU
 Japan,1259.41,1.25941,17.27,non-EU
 Philippines,209.1,0.2091,18.7,non-EU
 Nigeria,295.68,0.29568,23.46,non-EU
-Tunisia,39.71,0.03971,25,non-EU
 Israel,90.16,0.09016,25.87,non-EU
 Bangladesh,190.02,0.19002,26.72,non-EU
-Albania,9.59,0.00959,27.19,non-EU
 Italy,403.81,0.40381,30.32,EU
-Guatemala,34.47,0.03447,30.39,non-EU
-Senegal,30.51,0.03051,30.61,non-EU
 France,410.11,0.41011,30.76,EU
-Dominican Republic,37.63,0.03763,31.07,non-EU
-Burkina Faso,29.82,0.02982,33.03,non-EU
 Hungary,59.2,0.0592,34.48,EU
-Honduras,21.81,0.02181,34.73,non-EU
-Jamaica,9.08,0.00908,35.45,non-EU
 Austria,76.89,0.07689,36.12,EU
-Nicaragua,19.14,0.01914,36.13,non-EU
-Slovakia,38.63,0.03863,37.53,EU
 United Kingdom,474.31,0.47431,39.94,EU
-Zimbabwe,29.84,0.02984,40.51,non-EU
-Armenia,9.6,0.0096,41.84,non-EU
-Denmark,47.71,0.04771,41.87,EU
 Finland,56.58,0.05658,45.21,EU
-El Salvador,12.75,0.01275,45.54,non-EU
-Jordan,35.72,0.03572,45.8,non-EU
 Uganda,53.67,0.05367,49,non-EU
 Cameroon,88.32,0.08832,50.26,non-EU
-Sri Lanka,34.48,0.03448,50.32,non-EU
 Ethiopia,165.59,0.16559,54.51,non-EU
-Georgia,17.21,0.01721,55.11,non-EU
-Benin,15.89,0.01589,60.94,non-EU
-Ghana,41.47,0.04147,63.7,non-EU
 Sweden,50.24,0.05024,65.11,EU
-Madagascar,32.1,0.0321,66.76,non-EU
-Costa Rica,15.56,0.01556,67.22,non-EU
-Mauritius,6.49,0.00649,67.37,non-EU
 Tanzania,104.64,0.10464,69.55,non-EU
-Nepal,46.88,0.04688,72.64,non-EU
-Lithuania,18.88,0.01888,74.18,EU
-Latvia,11.35,0.01135,75.48,EU
 Kenya,78.85,0.07885,76.68,non-EU
 Belgium,110.07,0.11007,76.83,EU
-Paraguay,47.45,0.04745,82.4,non-EU
-Kyrgyzstan,16.83,0.01683,87.46,non-EU
 Singapore,63.2,0.0632,95.67,non-EU
-Uruguay,37.1,0.0371,98.02,non-EU
-Cambodia,35.45,0.03545,99.39,non-EU
-Mozambique,36.1,0.0361,101.13,non-EU
-Zambia,41.06,0.04106,118.82,non-EU
-Malawi,16.18,0.01618,135.57,non-EU
-Namibia,12.34,0.01234,153,non-EU
-Luxembourg,9.77,0.00977,163.46,EU
-Togo,8.77,0.00877,174,non-EU
-Panama,18.56,0.01856,176.16,non-EU
-Botswana,14.48,0.01448,190.21,non-EU
-Switzerland,48.26,0.04826,205.4,non-EU
-Malta,1.92,0.00192,235.4,EU
-Laos,20.88,0.02088,237.16,non-EU
