@@ -1,4 +1,3 @@
-
 // -----------STAGE ONE----------- //
 //Set SVG size for Stage 1 and 3 charts
 var margin = {
@@ -396,7 +395,7 @@ bullet.events.on("dragstop", event => {
     var currentData = []
     series.dataItems.values.forEach(i => currentData.push(i.valueX));
 
-    d3.json("/data/draggablebar_data.json").then((data) => {
+    d3.json("data/draggablebar_data.json").then((data) => {
         for (var i = 0; i < data.length; i++) {
             data[i].newChange = currentData[i];
             data[i].reducedEmissions = (1 + data[i].newChange / 100) * data[i][1990];
@@ -663,8 +662,8 @@ var heightMob = 540;
 var margin = {
     top: 10,
     right: 20,
-    left: 90,
-    bottom: 50
+    left: 70,
+    bottom: 30
 };
 
 var barMobile = d3.select(".bar-mobile")
@@ -675,7 +674,6 @@ var barMobile = d3.select(".bar-mobile")
 var barMobileWrapper = barMobile
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .attr("class", "graph-wrapper");
 
 
 widthMob = widthMob - margin.left - margin.right;
@@ -824,7 +822,6 @@ var barIndustry = d3.select(".bar-industry-mobile")
 var barIndustryWrapper = barIndustry
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .attr("class", "graph-wrapper");
 
 
 widthIndustryMob = widthIndustryMob - margin.left - margin.right;
@@ -1059,119 +1056,199 @@ d3.json("data/clothingData.json")
 //----------STAGE THREE---------//
 //----------UK consumption emissions versus production emissions chart-------------//
 
-var stage3UKChart = d3.select(".UK_comparison_chart")
+var marginUKchart = {
+    top: 40,
+    right: 50,
+    left: 50,
+    bottom: 80
+};
+
+var stage3UKChart = d3.select(".uk-consumption")
     .attr("viewBox", "0 0 " + width + " " + height)
     .attr("class", "mr-2")
-    .attr("class", "mt-5")
 
-// Append g to wrap up line chart
 var stage3UKWrapper = stage3UKChart.append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .attr("transform", "translate(30,85)")
-    .attr("class", "graph-wrapper")
+    .attr("transform", "translate(" + marginUKchart.left + "," + marginUKchart.top + ")")
+    .attr("transform", "translate(50,30)")
 
-//Set x-axis scale
-var xScaleUKChart = d3.scaleTime()
-    .domain([new Date("1990-01-01"), new Date("2020-01-01")])
-    .range([0, 700]);
-
-var dates = [new Date("1990-01-01"), new Date("2000-01-01"), new Date("2010-01-01"), new Date("2020-01-01")];
-
-stage3UKWrapper
-    .selectAll('text')
-    .data(dates)
-    .enter()
-    .append('text')
-    .attr("fill", "#fef7ea")
-    .attr("transform", "translate(-18,525)")
-    .attr('x', function (d) {
-        return xScaleUKChart(d);
-    })
-    .text(function (d) {
-        var year = d3.timeFormat("%Y");
-        return year(d);
-    });
-
-// Create x-axis
-var xAxisUKChart = d3.axisBottom()
-    .scale(xScaleUKChart)
-    .ticks(6)
+width = width - marginUKchart.left - marginUKchart.right;
+height = height - marginUKchart.top - marginUKchart.bottom;
 
 
-// Append x-axis to svg
-stage3UKWrapper.append("g")
-    .attr("transform", "translate(0,500)")
-    .attr("class", "xAxis")
-    .call(xAxisUKChart);
-
-//Set y-axis scale
-var yScaleUKChart = d3.scaleLinear()
-    .domain([1100, 0])
-    .range([0, 500])
-
-// Create y-axis
-var yAxisUKChart = d3.axisRight() //Do we want axis right (like other graphs)?
-    .scale(yScaleUKChart)
-    .ticks(11)
-
-// Append y-axis to svg
-stage3UKWrapper.append("g")
-    .attr("transform", "translate(700,0)")
-    .attr("class", "yAxis")
-    .call(yAxisUKChart);
-
-//Append text label to svg
-stage3UKWrapper.append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("y", 0 - margin.left)
-    .attr("x", 0 - (height / 2))
-    .attr("dy", "1em")
-    .attr("font-family", "HelveticaNeue-Light")
-    .style("stroke", "#fef7ea")
-    .text("Megatonnes CO2 equivalent");
-
-// Create gridlines
-var gridlineUKChart = d3.axisRight()
-    .tickFormat("")
-    .tickSize(width - 110)
-    .scale(yScaleUKChart)
-    .tickValues([100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100]);
-
-stage3UKWrapper.append("g")
-    .attr("class", "grid")
-    .call(gridlineUKChart);
-
-
-var createLine = d3.line()
-    .x(function (d) {
-        return x(d.dates);
-    })
-    .y(function (d) {
-        return y(d.territorial_emissions);
-    });
-
-d3.csv("/data/UK_chart_data.csv").then(function (data) {
+d3.csv("data/UK_chart_data_adjusted.csv").then(function (data) {
 
     data.forEach(function (d) {
-        d.dates = +d.dates;
+        d.dates = d3.timeParse("%d/%m/%Y")(d.dates);
         d.territorial_emissions = +d.territorial_emissions;
         d.consumption_emissions = +d.consumption_emissions;
-    })
+    });
 
-    console.log("Uk chart", data)
+    // Add X axis --> it is a date format
+    var xUkScale = d3.scaleTime()
+        .domain(d3.extent(data, function (d) {
+            return d.dates;
+        }))
+        .range([0, width]);
+
+    stage3UKWrapper.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(xUkScale))
+        .attr("class", "xAxisConsump")
+
+    // Add Y axis
+    var yUkScale = d3.scaleLinear()
+        .domain([0, d3.max(data, function (d) {
+            return d.consumption_emissions;
+        })])
+        .range([height, 0]);
+    stage3UKWrapper.append("g")
+        .call(d3.axisLeft(yUkScale))
+        .attr("class", "yAxis");
+
+
+    // Add projection box
+    stage3UKWrapper.append("rect")
+        .attr("x", xUkScale(new Date("2012-01-01")))
+        .attr("y", yUkScale(1100))
+        .attr("width", xUkScale(new Date("2028-01-01")))
+        .attr("height", yUkScale(-8))
+        .style("fill", "#888")
+        .style("opacity", 0.4)
+
+    // Add the lines
+    // Consumption up to 2012 
+    stage3UKWrapper.append("path")
+        .datum(data.filter(function (d) {
+            return d.dates < new Date("2012-01-02")
+        }))
+        .attr("fill", "none")
+        .attr("stroke", "#df9827")
+        .attr("stroke-width", 3)
+        .attr("d", d3.line()
+            .x(function (d) {
+                return xUkScale(d.dates)
+            })
+            .y(function (d) {
+                return yUkScale(d.consumption_emissions)
+            })
+        );
+
+    // Consumption post-2012 
+    stage3UKWrapper.append("path")
+        .datum(data.filter(function (d) {
+            return d.dates > new Date("2011-01-02")
+        }))
+        .attr("fill", "none")
+        .attr("stroke", "#df9827")
+        .attr("stroke-width", 3)
+        .attr("d", d3.line()
+            .x(function (d) {
+                return xUkScale(d.dates)
+            })
+            .y(function (d) {
+                return yUkScale(d.consumption_emissions)
+            })
+        );
+
+    // Territorial up to 2012
+    stage3UKWrapper.append("path")
+        .datum(data.filter(function (d) {
+            return d.dates < new Date("2012-01-02")
+        }))
+        .attr("fill", "none")
+        .attr("stroke", "#888")
+        .attr("stroke-width", 3)
+        .attr("d", d3.line()
+            .x(function (d) {
+                return xUkScale(d.dates)
+            })
+            .y(function (d) {
+                return yUkScale(d.territorial_emissions)
+            })
+        );
+
+    // Territorial post-2012
+    stage3UKWrapper.append("path")
+        .datum(data.filter(function (d) {
+            return d.dates > new Date("2011-01-02")
+        }))
+        .attr("fill", "none")
+        .attr("stroke", "#888")
+        .attr("stroke-width", 3)
+        .attr("d", d3.line()
+            .x(function (d) {
+                return xUkScale(d.dates)
+            })
+            .y(function (d) {
+                return yUkScale(d.territorial_emissions)
+            })
+        );
+
+
+    var areaConsumption = d3.area()
+        .x(function (d) {
+            return xUkScale(d.dates);
+        })
+        .y0(function (d) {
+            return yUkScale(d.consumption_emissions);
+        })
+        .y1(function (d) {
+            return yUkScale(d.territorial_emissions);
+        });
+
+
+    var areaTerritorial = d3.area()
+        .x(function (d) {
+            return xUkScale(d.dates);
+        })
+        .y0(height)
+        .y1(function (d) {
+            return yUkScale(d.territorial_emissions);
+        });
+
+    //Area in between
+    stage3UKWrapper.append("path")
+        .datum(data)
+        .attr("class", "consumption-area")
+        .attr("d", areaConsumption)
+        .style("fill", "#df9827")
+        .style("opacity", 0.2)
+
+    // Area under territorial
+    stage3UKWrapper.append("path")
+        .datum(data)
+        .attr("class", "territorial-area")
+        .attr("d", areaTerritorial)
+        .style("fill", "#888")
+        .style("opacity", 0.2)
+
+    // Annotations
+    stage3UKWrapper.append("text")
+        .attr("x", xUkScale(new Date("1991-01-01")))
+        .attr("y", yUkScale(400))
+        .text("Territorial emissions")
+        .attr("class", "consumption-label")
+        .style("fill", "#fef7ea")
+
+    stage3UKWrapper.append("text")
+        .attr("x", xUkScale(new Date("1991-01-01")))
+        .attr("y", yUkScale(810))
+        .text("Consumption emissions")
+        .attr("class", "consumption-label")
+        .style("fill", "#fef7ea")
+
+    stage3UKWrapper.append("text")
+        .attr("x", xUkScale(new Date("2015-01-01")))
+        .attr("y", yUkScale(1050))
+        .text("Projected reduction to meet 2050 target")
+        .attr("class", "consumption-label")
+        .style("fill", "#fef7ea")
+
 });
-
-// stage3UKWrapper.append("path")
-//     .data(data)
-//     .enter()
-//     .attr("class", "line")
-//     .attr("d", createLine(data))
-
-
 
 //-----------CCA chart----------//
 var stage3Chart = d3.select(".cca-chart")
-    .attr("viewBox", "0 0 " + width + " " + 550)
+    .attr("viewBox", "0 0 " + width + " " + 450)
     .attr("class", "mt-5")
 
 // Append g to wrap up line chart
@@ -1236,7 +1313,7 @@ d3.csv("data/worldGHG_tradeEmission.csv").then(function (data) {
     // Create gridlines
     var gridlineHorizontal = d3.axisRight()
         .tickFormat("")
-        .tickSize(width - 185)
+        .tickSize(width - 80)
         .scale(yScale3)
         .tickValues([-20, 0, 20, 40, 60, 80, 100]);
 
@@ -1246,7 +1323,7 @@ d3.csv("data/worldGHG_tradeEmission.csv").then(function (data) {
 
     var gridlineVertical = d3.axisBottom()
         .tickFormat("")
-        .tickSize(height - 330)
+        .tickSize(height - 205)
         .scale(xScale3)
         .tickValues([0, 5, 10, 15, 20, 25, 30, 35, 40]);
 
@@ -1403,3 +1480,364 @@ d3.csv("data/worldGHG_tradeEmission.csv").then(function (data) {
         .attr("y2", yScale3(37))
         .style("stroke", "#fef7ea")
 });
+
+// -----------STAGE 2 - Mobile----------- //
+//Set SVG size
+var ccaMobWidth = 400;
+var ccaMobHeight = 540;
+
+var ccaMobMargin = {
+    top: 10,
+    right: 20,
+    left: 30,
+    bottom: 40
+};
+
+var ccaMobile = d3.select(".cca-mobile")
+    .attr("width", ccaMobWidth)
+    .attr("height", ccaMobHeight)
+    .attr("transform", "translate(0,5)");
+
+var ccaMobileWrapper = ccaMobile
+    .append("g")
+    .attr("transform", "translate(" + ccaMobMargin.left + "," + ccaMobMargin.top + ")")
+    .attr("class", "graph-wrapper");
+
+
+ccaMobWidth = ccaMobWidth - ccaMobMargin.left - ccaMobMargin.right;
+ccaMobHeight = ccaMobHeight - ccaMobMargin.top - ccaMobMargin.bottom;
+
+var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([40, 100])
+    .html(function (d) {
+        return "<strong>Country:</strong> <span style='color:#fef7ea'>" + d.country +
+            "</span><br><strong>% difference:</strong> <span style='color:#fef7ea'>" + d.prop + "</span>";
+    })
+ccaMobile.call(tip);
+
+d3.csv("data/worldGHG_tradeEmission.csv")
+    .then(function (data) {
+
+        data = data.sort(function (x, y) {
+            return d3.descending(parseFloat(x.prop), parseFloat(y.prop));
+        })
+
+        console.log(data)
+
+        data.forEach(function (d) {
+            d.volumeGT = +d.volumeGT;
+            d.prop = +d.prop;
+        });
+
+        data.reduce((acc, cur) => {
+            cur.start = acc;
+            return acc + (cur.volumeGT);
+        }, 0);
+
+        console.log(data[64].start)
+
+        //Set y-axis scale
+        var yScaleCcaMob = d3.scaleLinear()
+            .domain([0, data[64].start])
+            .range([500, 0]);
+
+
+        // Create y-axis
+        var yAxisCcaMob = d3.axisLeft()
+            .scale(yScaleCcaMob);
+
+        // Append y-axis to svg
+        ccaMobileWrapper.append("g")
+            .attr("class", "yAxis")
+            .call(yAxisCcaMob);
+
+        //Set x-axis scale
+        var xScaleCcaMob = d3.scaleLinear()
+            .domain([-30, 100])
+            .range([0, 280]);
+
+
+        // Create x-axis
+        var xAxisCcaMob = d3.axisBottom()
+            .scale(xScaleCcaMob)
+            .ticks(5);
+
+        // Append x-axis to svg
+        ccaMobileWrapper.append("g")
+            .attr("transform", "translate(0,500)")
+            .attr("class", "xAxisMob")
+            .call(xAxisCcaMob);
+
+        // Add 0 line
+        ccaMobileWrapper.append("line")
+            .attr("y1", 0)
+            .attr("y2", ccaMobHeight)
+            .attr("x1", xScaleCcaMob(0))
+            .attr("x2", xScaleCcaMob(0))
+            .attr("class", "zero-line");
+
+        // Create gridlines
+        var ccaGridlineVertical = d3.axisBottom()
+            .tickFormat("")
+            .tickSize(ccaMobHeight)
+            .scale(xScaleCcaMob)
+            .tickValues([-20, 0, 20, 40, 60, 80, 100]);
+
+        ccaMobileWrapper.append("g")
+            .attr("class", "gridStage2")
+            .call(ccaGridlineVertical);
+
+        var ccaGridlineHorizontal = d3.axisRight()
+            .tickFormat("")
+            .tickSize(ccaMobWidth - 70)
+            .scale(yScaleCcaMob)
+            .tickValues([0, 5, 10, 15, 20, 25, 30, 35, 40]);
+
+        ccaMobileWrapper.append("g")
+            .attr("class", "gridStage2")
+            .call(ccaGridlineHorizontal);
+
+        // Add interactivity
+        function MouseOver(d, i) {
+            // Use D3 to select element, change color and size
+            d3.select(this).attr("stroke-width", 0.8);
+            tip.show(d, i)
+        }
+
+        function MouseOut(d, i) {
+            // Use D3 to select element, change color back to normal
+            d3.select(this).attr("stroke-width", 0.1);
+            tip.hide(d, i)
+        };
+        // add bars
+        ccaMobileWrapper.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .style("fill", function (d) {
+                if (d.region == "non-EU") {
+                    return "#888";
+                } else {
+                    return "#df9827";
+                }
+            })
+            .style("stroke", "#fef7ea")
+            .attr("stroke-width", 0.1)
+            .attr("width", function (d) {
+                if (d.prop > 0) {
+                    return xScaleCcaMob(d.prop) - xScaleCcaMob(0);
+                } else {
+                    return xScaleCcaMob(0) - xScaleCcaMob(d.prop);
+                }
+            })
+            .attr("height", function (d) {
+                return yScaleCcaMob(0) - yScaleCcaMob(d.volumeGT)
+            })
+            .attr("y", function (d) {
+                return yScaleCcaMob(0) - yScaleCcaMob(d.start)
+            })
+            .attr("x", function (d, i) {
+                if (d.prop > 0) {
+                    return xScaleCcaMob(0)
+                } else {
+                    return xScaleCcaMob(d.prop)
+                }
+            })
+            .on('mouseover', MouseOver)
+            .on('mouseout', MouseOut)
+
+        ccaMobileWrapper.append("rect")
+            .attr("x", xScaleCcaMob(38))
+            .attr("y", yScaleCcaMob(6))
+            .attr("width", xScaleCcaMob(23))
+            .attr("height", 50)
+            .style("fill", "#14171e");
+
+        ccaMobileWrapper.append("rect")
+            .attr("x", xScaleCcaMob(42))
+            .attr("y", yScaleCcaMob(5.5))
+            .attr("width", 30)
+            .attr("height", 10)
+            .style("fill", "#df9827");
+
+        ccaMobileWrapper.append("rect")
+            .attr("x", xScaleCcaMob(42))
+            .attr("y", yScaleCcaMob(3.5))
+            .attr("width", 30)
+            .attr("height", 10)
+            .style("fill", "#888");
+
+        ccaMobileWrapper.append("text")
+            .attr("x", xScaleCcaMob(59))
+            .attr("y", yScaleCcaMob(4.7))
+            .text("EU")
+            .attr("class", "ccaLabel")
+
+        ccaMobileWrapper.append("text")
+            .attr("x", xScaleCcaMob(59))
+            .attr("y", yScaleCcaMob(2.8))
+            .text("non-EU")
+            .attr("class", "ccaLabel")
+
+        ccaMobileWrapper.append("text")
+            .attr("x", xScaleCcaMob(18))
+            .attr("y", yScaleCcaMob(28))
+            .text("Net")
+            .attr("class", "ccaLabel")
+
+        ccaMobileWrapper.append("text")
+            .attr("x", xScaleCcaMob(12))
+            .attr("y", yScaleCcaMob(27))
+            .text("consumer")
+            .attr("class", "ccaLabel")
+
+        ccaMobileWrapper.append("text")
+            .attr("x", xScaleCcaMob(-17))
+            .attr("y", yScaleCcaMob(28))
+            .text("Net")
+            .attr("class", "ccaLabel")
+
+        ccaMobileWrapper.append("text")
+            .attr("x", xScaleCcaMob(-22))
+            .attr("y", yScaleCcaMob(27))
+            .text("producer")
+            .attr("class", "ccaLabel")
+
+
+        var triangleRight = xScaleCcaMob(-24) + ' ' + yScaleCcaMob(27.5) + ', ' + xScaleCcaMob(-24) + ' ' + yScaleCcaMob(28.5) + ', ' + xScaleCcaMob(-26) + ' ' + yScaleCcaMob(28) + ' ' + xScaleCcaMob(-24) + ', ' + yScaleCcaMob(27.5);
+        ccaMobileWrapper.append('polyline')
+            .attr('points', triangleRight)
+            .style('fill', '#fef7ea');
+
+        var triangleLeft = xScaleCcaMob(36) + ' ' + yScaleCcaMob(27.5) + ', ' + xScaleCcaMob(36) + ' ' + yScaleCcaMob(28.5) + ', ' + xScaleCcaMob(38) + ' ' + yScaleCcaMob(28) + ' ' + xScaleCcaMob(36) + ', ' + yScaleCcaMob(27.5);
+        ccaMobileWrapper.append('polyline')
+            .attr('points', triangleLeft)
+            .style('fill', '#fef7ea');
+
+
+        ccaMobileWrapper.append("text")
+            .attr("x", xScaleCcaMob(5))
+            .attr("y", yScaleCcaMob(8))
+            .attr("class", "ccaLabel")
+            .text("China")
+
+        ccaMobileWrapper.append("text")
+            .attr("x", xScaleCcaMob(5))
+            .attr("y", yScaleCcaMob(18))
+            .attr("class", "ccaLabel")
+            .text("India")
+
+        ccaMobileWrapper.append("text")
+            .attr("x", xScaleCcaMob(12))
+            .attr("y", yScaleCcaMob(31))
+            .attr("class", "ccaLabel")
+            .text("US")
+
+        ccaMobileWrapper.append("text")
+            .attr("x", xScaleCcaMob(32))
+            .attr("y", yScaleCcaMob(37.5))
+            .attr("class", "ccaLabel")
+            .text("UK")
+
+        ccaMobileWrapper.append("line")
+            .attr("x1", xScaleCcaMob(-5))
+            .attr("x2", xScaleCcaMob(3))
+            .attr("y1", yScaleCcaMob(8.3))
+            .attr("y2", yScaleCcaMob(8.3))
+            .style("stroke", "#fef7ea")
+
+        ccaMobileWrapper.append("line")
+            .attr("x1", xScaleCcaMob(-4))
+            .attr("x2", xScaleCcaMob(3))
+            .attr("y1", yScaleCcaMob(18.3))
+            .attr("y2", yScaleCcaMob(18.3))
+            .style("stroke", "#fef7ea")
+
+        ccaMobileWrapper.append("line")
+            .attr("x1", xScaleCcaMob(3))
+            .attr("x2", xScaleCcaMob(10.5))
+            .attr("y1", yScaleCcaMob(31.3))
+            .attr("y2", yScaleCcaMob(31.3))
+            .style("stroke", "#fef7ea")
+
+        ccaMobileWrapper.append("line")
+            .attr("x1", xScaleCcaMob(37))
+            .attr("x2", xScaleCcaMob(37))
+            .attr("y1", yScaleCcaMob(40))
+            .attr("y2", yScaleCcaMob(39))
+            .style("stroke", "#fef7ea")
+    });
+
+
+//----------STAGE FOUR---------//
+//----------Individuals, Businesses, Government cycle-------------//
+
+// var arrow = document.querySelectorAll(".arrow").forEach(d => {
+//     d.addEventListener("mouseover", arrowMouseover)
+//     d.addEventListener("mouseout", arrowMouseout)
+// })
+
+var arrows = d3.selectAll('.arrow')
+    .on('mouseover', arrowMouseover)
+    .on('mouseout', arrowMouseout);
+var cycleTexts = d3.selectAll(".cycleText")
+    .on('mouseover', textMouseover)
+    .on('mouseout', textMouseout);
+
+function textMouseover() {
+    d3.select(this)
+        .style("opacity", 1)
+        .call(text =>
+            d3.select(`#${text.attr("id").slice(0, 7)}`)
+                .style('stroke', '#fef7ea')
+                .style("stroke-width", "25px")
+                .style("opacity", 1)
+        )
+};
+
+function textMouseout() {
+    d3.select(this)
+        .style("opacity", 0.4)
+        .call(text =>
+            d3.select(`#${text.attr("id").slice(0, 7)}`)
+                .style('stroke', '#df9827')
+                .style("stroke-width", "18px")
+                .style("opacity", 0.4)
+        )
+};
+
+
+function arrowMouseover() {
+    d3.select(this)
+        .style('stroke', '#fef7ea')
+        .style("stroke-width", "25px")
+        .style("opacity", 1)
+        .call(arrow =>
+            d3.select(`#${arrow.attr("id")}-text`)
+                .style("opacity", 1)
+        )
+};
+
+function arrowMouseout() {
+    d3.select(this)
+        .style('stroke', '#df9827')
+        .style("stroke-width", "18px")
+        .style("opacity", 0.4)
+        .call(arrow =>
+            d3.select(`#${arrow.attr("id")}-text`)
+                .style("opacity", 0.4)
+        )
+};
+
+function displayWindowSize() {
+    var w = document.documentElement.clientWidth;
+    var h = document.documentElement.clientHeight;
+
+    console.log(
+        "Width: " + w + ', Height: ' + h)
+}
+
+window.addEventListener("resize", displayWindowSize)
+displayWindowSize()

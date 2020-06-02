@@ -12,6 +12,20 @@ body {
     overflow-x: hidden;
 }
 
+a {
+    color: #df9827 !important;
+}
+
+a:hover {
+    color: #888 !important;
+}
+
+.data-source {
+    font-size: 1em;
+    font-style: italic;
+    color: #888;
+}
+
 .spacer {
     height: 10vh;
 }
@@ -20,11 +34,26 @@ body {
     height: 6vh;
 }
 
+/* horizontal line style */
+hr {
+    border-top: 1px solid #df9827;
+}
+
+/* normal text style */
+p {
+    font-size: 1.2rem;
+}
+
+/* highlight text style */
+b {
+    color: #df9827;
+    font-weight: bold;
+}
+
 
 /* =====================
     SideBar decoration
 ========================*/
-
 
 /* width */
 ::-webkit-scrollbar {
@@ -47,22 +76,18 @@ body {
     background: #df9827;
 }
 
-hr {
-    border-top: 1px solid #df9827;
-}
-
-p {
-    font-size: 1.2rem;
-}
-
-b {
-    color: #df9827;
-    font-weight: bold;
-}
+/* =================
+    Section 1
+===================*/
 
 #section1 {
     margin-top: 15vh;
+    padding-bottom: 5vh;
     height: 100%;
+}
+
+#date {
+    text-transform: none;
 }
 
 #byline {
@@ -92,26 +117,33 @@ b {
 
 #scrollContainer {
     padding-top: 10vh;
+    padding-bottom: 1px;
+    padding-right: 50px;
+    padding-left: 50px;
 }
 
 #section2 {
     height: 100%;
 }
 
+
 #graphScrollContainer {
     position: relative;
     display: block;
-    padding: 10vw;
 }
 
 #graphTargetsText {
     margin-left: 55vw;
+    margin-right: 50px;
     background-color: rgba(1, 1, 1, 0);
+}
+
+#graphTargetsText>div:first-child {
+    padding-top: 100px;
 }
 
 
 #graphTargetsText>div {
-    padding-right: 35px;
     margin-bottom: 200px;
     opacity: 0.2;
     transition: opacity .5s ease-in-out;
@@ -132,7 +164,7 @@ b {
 }
 
 #graphContainer {
-    padding-top: 10vh;
+    padding-top: 100px;
 
 }
 
@@ -152,123 +184,12 @@ b {
 #interactive-tool-mobile,
 #production-chain-mobile,
 #clothing-industry-mobile-wrapper,
-#equation-mobile {
+#equation-mobile,
+.cca-mobile-div,
+.cycle-mobile {
     display: none;
 }
 
-@media (max-width: 925px) {
-    #graphTargetsGraph {
-        width: 100%;
-        margin-right: 0px;
-        float: none;
-    }
-
-    #graphTargetsText {
-        position: relative;
-        margin: 0px auto;
-        width: auto;
-    }
-
-    #brexitBtnForDesktop {
-        display: none;
-
-    }
-
-    #brexitBtnForMobile {
-        display: block;
-        background: #df9827;
-        color: #fef7ea;
-        border: 1px solid #fef7ea;
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 520px) {
-    #graphContainer {
-        width: 80vw;
-    }
-
-    .col-sm-8,
-    .col,
-    .col-sm-6,
-    .col-sm-4 {
-        padding: 0 8vw;
-    }
-
-
-    .container-fluid {
-        padding: 0;
-    }
-
-    #graphTargetsText>div {
-        margin-bottom: 200px;
-        opacity: 0.4;
-        transition: opacity .5s ease-in-out;
-        background-color: rgba(1, 1, 1, 0);
-    }
-
-    #blankBox {
-        padding-top: 20vh;
-    }
-
-    #section1 {
-        margin-top: 4vh;
-    }
-
-
-
-    #expButton {
-        background-color: #888;
-    }
-
-
-    #needButton {
-        background-color: #df9827;
-    }
-
-    #expButton:hover,
-    #needButton:hover {
-        opacity: 0.8
-    }
-
-    .zero-line {
-        stroke-width: 2px;
-        stroke: #fef7ea;
-    }
-
-    #but1990,
-    #but2005,
-    #but2012 {
-        background-color: #df9827;
-    }
-
-    #but1990:hover,
-    #but2005:hover,
-    #but2012:hover {
-        opacity: 0.8
-    }
-
-    #an2005,
-    #an2012 {
-        opacity: 0;
-    }
-
-    #production-chain,
-    #interactive-tool,
-    #clothing-industry-wrapper,
-    #equation {
-        display: none
-    }
-
-    #production-chain-mobile,
-    #interactive-tool-mobile,
-    #clothing-industry-mobile-wrapper,
-    #equation-mobile {
-        display: block;
-    }
-
-
-}
 
 
 
@@ -286,16 +207,18 @@ b {
 
 #draggable-chart,
 #result-chart,
-#interactive-tool-chart,
 #production-chain,
+#interactive-tool-chart,
 #production-chain-mobile,
 #clothing-industry-raceChart,
 #clothing-industry-mobile-barChart {
     height: 80%;
     position: sticky;
-    top: 20px;
+    top: 50px;
 
 }
+
+
 
 
 #country-bar {
@@ -320,7 +243,24 @@ b {
 
 }
 
-.modal-body-context {
+
+#solcer-button,
+#covid-button {
+    background-color: #df9827;
+    color: #fef7ea;
+    text-align: center;
+    border: none;
+    font-size: 1.2em;
+    height: 10vh;
+    border-radius: 12px;
+    border: 2px solid #fef7ea;
+
+}
+
+
+.modal-body-context,
+.modal-body-solcer,
+.modal-body-covid {
     font-size: 1.5em;
 }
 
@@ -329,12 +269,12 @@ b {
 }
 
 
-#
+
 /* =====================================
    Bar chart race annotations (press play, etc.)
 ========================================*/
 
-.play-annotation {
+#play-annotation {
     position: relative;
     top: 75vh;
     text-align: right;
@@ -343,7 +283,7 @@ b {
 
 
 /* =====================================
-  CCA
+            CCA
 ========================================*/
 
 #country-box {
@@ -394,8 +334,15 @@ b {
 }
 
 
-.yAxis text {
+.yAxis text,
+.xAxisMob text,
+.xAxisClothing text,
+.xAxisConsump text {
     font-size: 1.5em;
+}
+
+#conLine {
+    transition: 0.5s;
 }
 
 .yAxis>.tick line {
@@ -420,6 +367,10 @@ b {
 
 .xAxisStage3>.domain {
     display: none;
+}
+
+.consumption-label {
+    font-size: 1.4em
 }
 
 .ccaLabel {
@@ -456,10 +407,10 @@ b {
 
 
 /* =====================================
-  Climate neutrality
+    Climate neutrality
 ========================================*/
 blockquote {
-    font-size: 2.2em;
+    font-size: 2em;
     line-height: 1.5em;
     padding: 2vh;
     color: #df9827;
@@ -479,6 +430,187 @@ cite {
     padding: 2vh;
 }
 
-/* .img-fluid {
-    border: 4px solid #df9827;
-} */
+.climate-neutral p {
+    margin-bottom: 2rem;
+}
+
+.caption {
+    margin-top: 3vh;
+    font-size: 0.7em;
+    text-align: center;
+}
+
+.climate-neutral h3 {
+    color: #df9827;
+    line-height: 2em;
+}
+
+.arrow {
+    opacity: 0.4;
+}
+
+.cycleTextL,
+.cycleTextR {
+    padding: 4vh;
+    background-color: #fef7ea;
+    color: #14171e;
+    opacity: 0.4;
+    border-radius: 8px;
+}
+
+
+.cycleTextL {
+    margin: 4vh 0 4vh 8vh;
+}
+
+.cycleTextR {
+    margin: 4vh 8vh 4vh 0;
+}
+
+
+@media (max-width: 925px) {
+    #scrollContainer {
+        padding-top: 0;
+        padding-bottom: 1px;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    #graphTargetsGraph {
+        width: 100%;
+        height: 50vh;
+        margin-right: 0px;
+        float: none;
+    }
+
+    #graphTargetsText {
+        position: relative;
+        margin: 0px auto;
+        width: auto;
+    }
+
+    #brexitBtnForDesktop {
+        display: none;
+
+    }
+
+    #brexitBtnForMobile {
+        display: block;
+        background: #df9827;
+        color: #fef7ea;
+        border: 1px solid #fef7ea;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 580px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    #section1 {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .container-fluid {
+        padding: 0;
+    }
+
+    #scrollContainer {
+        padding-top: 0;
+        padding-bottom: 1px;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    #graphTargetsText>div {
+        margin-bottom: 200px;
+        opacity: 0.4;
+        transition: opacity .5s ease-in-out;
+        background-color: rgba(1, 1, 1, 0);
+    }
+
+    #blankBox {
+        padding-top: 20vh;
+    }
+
+    #section1 {
+        margin-top: 4vh;
+    }
+
+    #expButton {
+        background-color: #888;
+    }
+
+
+    #needButton {
+        background-color: #df9827;
+    }
+
+    #expButton:hover,
+    #needButton:hover {
+        opacity: 0.8
+    }
+
+    .zero-line {
+        stroke-width: 2px;
+        stroke: #fef7ea;
+    }
+
+    #but1990,
+    #but2005,
+    #but2012 {
+        background-color: #df9827;
+    }
+
+    #but1990:hover,
+    #but2005:hover,
+    #but2012:hover {
+        opacity: 0.8
+    }
+
+    #an2005,
+    #an2012 {
+        opacity: 0;
+    }
+
+    #production-chain,
+    #interactive-tool,
+    #clothing-industry-wrapper,
+    #equation,
+    .cca-desktop,
+    .cycleTextL,
+    .cycleTextR,
+    .cycle {
+        display: none
+    }
+
+    #production-chain-mobile,
+    #interactive-tool-mobile,
+    #clothing-industry-mobile-wrapper,
+    #equation-mobile,
+    .cca-mobile-div,
+    .cycle-mobile {
+        display: block;
+    }
+
+    .consumption-label {
+        font-size: 0.7em;
+    }
+
+
+    .graph-scroll-active p,
+    .graph-scroll-fixed p {
+        font-size: 0.8em;
+    }
+
+    #img-ducky {
+        width: 80vw;
+    }
+
+}
